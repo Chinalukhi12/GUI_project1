@@ -1,5 +1,7 @@
 package com.company.models;
 
+import com.company.TooManyThingsException;
+
 import java.util.Map;
 
 public class Person {
@@ -8,6 +10,12 @@ public class Person {
 	private static final int MAX_SPACE_RENTED = 5;
 	private Map<String, Apartment> apartments;
 	private Map<String, Apartment> ownedApartments; // Apartment this person is tenant to
+	private Map<String, TenantLetter> tenantLetters;
+
+	private String name;
+	private String surname;
+	private String peselNumber;
+	private String address;
 
 	// Check in and check out self
 	public void checkIn(String id){
@@ -37,7 +45,7 @@ public class Person {
 
 
 	// Add item to a parking space
-	public void insertItemToParkingSpace(String parkingSpaceID, Item item){
+	public void insertItemToParkingSpace(String parkingSpaceID, Item item) throws TooManyThingsException {
 		for (Map.Entry<String, Apartment> apartments: ownedApartments.entrySet()){
 			if (apartments.getValue().getParkingSpaces().containsKey(parkingSpaceID)){
 				apartments.getValue().getParkingSpaces().get(parkingSpaceID).addItem(item);
@@ -48,7 +56,7 @@ public class Person {
 	}
 
 	// Add vehicle to a parking space
-	public void insertVehicleToParkingSpace(String parkingSpaceID, Vehicle vehicle){
+	public void insertVehicleToParkingSpace(String parkingSpaceID, Vehicle vehicle) throws TooManyThingsException {
 		for (Map.Entry<String, Apartment> apartments: ownedApartments.entrySet()){
 			if (apartments.getValue().getParkingSpaces().containsKey(parkingSpaceID)){
 				apartments.getValue().getParkingSpaces().get(parkingSpaceID).addVehicle(vehicle);

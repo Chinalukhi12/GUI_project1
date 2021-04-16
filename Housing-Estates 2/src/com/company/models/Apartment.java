@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.Set;
 
-public class Apartment {
-	private String ID;
-	private double volume;
-	private Person primaryOwner;
+public class Apartment extends Space{
 
 	private Set<Person> occupiedBy;
 	private Map<String, ParkingSpace> parkingSpaces;
@@ -18,7 +15,6 @@ public class Apartment {
 	public Apartment(double length, double breadth, double height){
 		this.ID = "APT-" + ++count;
 		this.volume = length*breadth*height;
-		this.startDate = LocalDate.now();
 	}
 
 	public Apartment(double volume){
@@ -36,5 +32,23 @@ public class Apartment {
 
 	public Map<String, ParkingSpace> getParkingSpaces() {
 		return parkingSpaces;
+	}
+
+	public Set<Person> getOccupiedBy() {
+		return occupiedBy;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	@Override
+	public void setPrimaryOwner(Person primaryOwner) {
+		this.primaryOwner = primaryOwner;
+		this.startDate = LocalDate.now();
 	}
 }

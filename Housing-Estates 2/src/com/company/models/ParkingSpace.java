@@ -4,10 +4,7 @@ import com.company.TooManyThingsException;
 
 import java.util.Set;
 
-public class ParkingSpace {
-	private String ID;
-	private double volume;
-	private Person primaryOwner;
+public class ParkingSpace extends Space{
 
 	private Set<Item> items;
 	private Set<Vehicle> vehicles;

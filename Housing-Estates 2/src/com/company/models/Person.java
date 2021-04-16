@@ -1,5 +1,6 @@
 package com.company.models;
 
+import com.company.ProblematicTenantException;
 import com.company.TooManyThingsException;
 
 import java.util.Map;
@@ -16,6 +17,19 @@ public class Person {
 	private String surname;
 	private String peselNumber;
 	private String address;
+
+	// Rent a space
+	public void rentSpace(Space space) throws ProblematicTenantException {
+		if(tenantLetters.size() > 3){
+			throw new ProblematicTenantException();
+		}
+		if (space.getPrimaryOwner() != null){
+			space.setPrimaryOwner(this);
+		}
+		if (space instanceof Apartment){
+			((Apartment)space).getOccupiedBy().add(this);
+		}
+	}
 
 	// Check in and check out self
 	public void checkIn(String id){

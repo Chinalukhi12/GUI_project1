@@ -1,4 +1,4 @@
 package com.company.models;
 
-public class Vehicle {
+public class Item {
 }

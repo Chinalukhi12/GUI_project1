@@ -1,68 +1,83 @@
 package com.company.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class Person {
-    private String name;
-    private String surname;
-    private String peselNumber;
-    private String Address;
-    private List<Flat> Flat;
-    private List<ParkingPlace> ParkingPlace;
 
-    public String getName() {
-        return name;
-    }
+	private int spacesRented;
+	private static final int MAX_SPACE_RENTED = 5;
+	private Map<String, Apartment> apartments;
+	private Map<String, Apartment> ownedApartments; // Apartment this person is tenant to
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	// Check in and check out self
+	public void checkIn(String id){
+		if (ownedApartments.containsKey(id)){
+			ownedApartments.get(id).checkIn(this);
+		}
+	}
 
-    public List<com.company.models.Flat> getFlat() {
-        return Flat;
-    }
+	public void checkOut(String id){
+		if (ownedApartments.containsKey(id)){
+			ownedApartments.get(id).checkOut(this);
+		}
+	}
 
-    public void setFlat(List<com.company.models.Flat> flat) {
-        Flat = flat;
-    }
+	// check in and check out other members
+	public void checkIn(String id, Person person){
+		if (ownedApartments.containsKey(id)){
+			ownedApartments.get(id).checkIn(this);
+		}
+	}
 
-    public List<com.company.models.ParkingPlace> getParkingPlace() {
-        return ParkingPlace;
-    }
+	public void checkOut(String id, Person person){
+		if (ownedApartments.containsKey(id)){
+			ownedApartments.get(id).checkOut(this);
+		}
+	}
 
-    public void setParkingPlace(List<com.company.models.ParkingPlace> parkingPlace) {
-        ParkingPlace = parkingPlace;
-    }
 
-    private boolean firstTenant;
+	// Add item to a parking space
+	public void insertItemToParkingSpace(String parkingSpaceID, Item item){
+		for (Map.Entry<String, Apartment> apartments: ownedApartments.entrySet()){
+			if (apartments.getValue().getParkingSpaces().containsKey(parkingSpaceID)){
+				apartments.getValue().getParkingSpaces().get(parkingSpaceID).addItem(item);
 
-    public Person() {
-    }
+				break;
+			}
+		}
+	}
 
-    public Person(String name, String surname, String peselNumber, String address, boolean firstTenant) {
-        this.name = name;
-        this.surname = surname;
-        this.peselNumber = peselNumber;
-        this.Address = address;
-        Flat = new ArrayList<>();
-        ParkingPlace = new ArrayList<>();
-        this.firstTenant = firstTenant;
-    }
-    public void GetFlat (Flat flat){
-        if(Flat.size()>5){
-            throw  new IllegalArgumentException(("I cannot rent more than 5 apartmant"));
-        } else{
-            this.Flat.add((flat)); //icine paremetre koyduk
-        }
+	// Add vehicle to a parking space
+	public void insertVehicleToParkingSpace(String parkingSpaceID, Vehicle vehicle){
+		for (Map.Entry<String, Apartment> apartments: ownedApartments.entrySet()){
+			if (apartments.getValue().getParkingSpaces().containsKey(parkingSpaceID)){
+				apartments.getValue().getParkingSpaces().get(parkingSpaceID).addVehicle(vehicle);
 
-    }
-    public void GetParkingPlace (ParkingPlace parkingPlace){
-        if(Flat.size()>5){
-            throw  new IllegalArgumentException(("I cannot rent more than 5 Parking place"));
-        } else{
-            this.ParkingPlace.add((parkingPlace)); //icine paremetre koyduk
-        }
+				break;
+			}
+		}
+	}
 
-    }
+	// Take Out item to a parking space
+	public void takeOutItemFromParkingSpace(String parkingSpaceID, Item item){
+		for (Map.Entry<String, Apartment> apartments: ownedApartments.entrySet()){
+			if (apartments.getValue().getParkingSpaces().containsKey(parkingSpaceID)){
+				apartments.getValue().getParkingSpaces().get(parkingSpaceID).removeItem(item);
+
+				break;
+			}
+		}
+	}
+
+	// Take Out vehicle to a parking space
+	public void takeOutVehicleFromParkingSpace(String parkingSpaceID, Vehicle vehicle){
+		for (Map.Entry<String, Apartment> apartments: ownedApartments.entrySet()){
+			if (apartments.getValue().getParkingSpaces().containsKey(parkingSpaceID)){
+				apartments.getValue().getParkingSpaces().get(parkingSpaceID).removeVehicle(vehicle);
+
+				break;
+			}
+		}
+	}
+
 }

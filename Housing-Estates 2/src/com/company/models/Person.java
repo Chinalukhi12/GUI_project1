@@ -3,6 +3,7 @@ package com.company.models;
 import com.company.ProblematicTenantException;
 import com.company.TooManyThingsException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Person {
@@ -18,10 +19,24 @@ public class Person {
 	private String peselNumber;
 	private String address;
 
+	public Person(String name, String surname, String peselNumber, String address) {
+		this.name = name;
+		this.surname = surname;
+		this.peselNumber = peselNumber;
+		this.address = address;
+		this.spacesRented = 0;
+		this.apartments = new HashMap<>();
+		this.ownedApartments = new HashMap<>();
+		this.tenantLetters = new HashMap<>();
+	}
+
 	// Rent a space
 	public void rentSpace(Space space) throws ProblematicTenantException {
 		if(tenantLetters.size() > 3){
 			throw new ProblematicTenantException();
+		}
+		if(spacesRented == MAX_SPACE_RENTED){
+			return;
 		}
 		if (space.getPrimaryOwner() != null){
 			space.setPrimaryOwner(this);
@@ -29,6 +44,7 @@ public class Person {
 		if (space instanceof Apartment){
 			((Apartment)space).getOccupiedBy().add(this);
 		}
+		spacesRented++;
 	}
 
 	// Check in and check out self

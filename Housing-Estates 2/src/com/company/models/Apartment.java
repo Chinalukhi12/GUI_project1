@@ -1,6 +1,8 @@
 package com.company.models;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,11 +17,15 @@ public class Apartment extends Space{
 	public Apartment(double length, double breadth, double height){
 		this.ID = "APT-" + ++count;
 		this.volume = length*breadth*height;
+		this.occupiedBy = new HashSet<>();
+		this.parkingSpaces = new HashMap<>();
 	}
 
 	public Apartment(double volume){
 		this.ID = "APT-" + ++count;
 		this.volume = volume;
+		this.occupiedBy = new HashSet<>();
+		this.parkingSpaces = new HashMap<>();
 	}
 
 	public void checkIn(Person person) {
@@ -50,5 +56,6 @@ public class Apartment extends Space{
 	public void setPrimaryOwner(Person primaryOwner) {
 		this.primaryOwner = primaryOwner;
 		this.startDate = LocalDate.now();
+		this.endDate = LocalDate.now().plusDays(30);
 	}
 }

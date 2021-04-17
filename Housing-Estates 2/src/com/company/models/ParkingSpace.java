@@ -2,6 +2,7 @@ package com.company.models;
 
 import com.company.TooManyThingsException;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class ParkingSpace extends Space{
@@ -13,11 +14,15 @@ public class ParkingSpace extends Space{
 	public ParkingSpace(double length, double breadth, double height){
 		this.ID = "PKG-" + ++count;
 		this.volume = length*breadth*height;
+		this.items = new HashSet<>();
+		this.vehicles = new HashSet<>();
 	}
 
 	public ParkingSpace(double volume){
 		this.ID = "PKG-" + ++count;
 		this.volume = volume;
+		this.items = new HashSet<>();
+		this.vehicles = new HashSet<>();
 	}
 
 	public void addItem(Item item) throws TooManyThingsException {

@@ -1,0 +1,141 @@
+package models;
+
+
+import java.util.*;
+
+public class Main {
+
+    public static Scanner enter = new Scanner(System.in);
+
+    public static ArrayList<Person> people = new ArrayList<>();
+    public static List<Apartment> apartments = new ArrayList<>();
+    public static List<TenantLetter> tenantLetters = new ArrayList<>();
+    public static List<ParkingSpace> parkingSpaces = new ArrayList<>();
+
+
+
+
+
+   public static Item items;
+  public static Vehicle vehicles;
+
+    public static Person p ;
+    public static  Apartment a;
+
+
+    public static void main(String[] args) {
+        boolean exit= true;
+        int result=0;
+
+
+        Apartment apartment1= new Apartment(12.5,10.21,8.20,"Ishtar karp 8/65");
+        Apartment apartment2= new Apartment(15.60,11.21,10.20,"185  T P Street, Opp Alankar Cinema, Girgaum");
+        Apartment apartment3= new Apartment(18.20,"D-222/2, Ttc Area, Shirwane, Nerul, Navi Mumbai");
+        Apartment apartment4= new Apartment(12.62,10.30,18.20,"Flat No 13 Hajiali Municipal Officers Chs, 4 Khadge Marg, Tardeo-tulsiwadi");
+        Apartment apartment5= new Apartment(21.65,12.21,12.80,"Unit No-7, U K Industrial Estate, Pokharan Road No-2, Opp Oswal Park, Thane (w)");
+        Apartment apartment6= new Apartment(180.20,"Shop No.5, Manjushree Bldg No.b/2, Sec No.4, Shanti Nagar, Mira Road");
+        Apartment apartment7= new Apartment(15.65,12.35,19.20,"28 , Hemu Plaza, Station Road, Near Mcdonald, Vile Parle(e)");
+        Apartment apartment8= new Apartment(12.65,15.21,8.26,"52 b, Rangwala Bldg, Dhobi Ghat Road, Jacob Circle");
+        Apartment apartment9= new Apartment(12.525,10.21,10.21,"Shop 4, Moonlight Apts, Mahakali Caves Road, Nr Sai Palace Hotel, Andheri(e)");
+        Apartment apartment10= new Apartment(120.20,"239 , Arun Chambers, Tardeo Road, Tardeo");
+
+       apartments.add(apartment1);
+        apartments.add(apartment2);
+        apartments.add(apartment3);
+        apartments.add(apartment4);
+        apartments.add(apartment5);
+        apartments.add(apartment6);
+        apartments.add(apartment7);
+        apartments.add(apartment8);
+        apartments.add(apartment9);
+        apartments.add(apartment10);
+
+        Person person1= new Person("Sushmita ","Charlie Pal","919976704445","23, Deepesh Villas, Cyber City Ludhiana - 516207");
+        Person person2= new Person("Peter   ","Choudhary","03841153613","24, Taahid Heights, PreetGunj Chennai - 549235");
+        Person person3= new Person("Zaad Kirti  ","vSankaran Pal","911455597757","89, VikrantPur, Jabalpur - 239696");
+        Person person4= new Person("Sushmita ","Sinha","09261290219","81, IshatGunj, Nagpur - 255681");
+        Person person5= new Person("Omar Ratan  "," Gola","00766556750","46, Alpa Heights, Yeshwanthpura Lucknow - 387109");
+        Person person6= new Person("Binnani  ","Binnani","9199710704445","54, Naseer Apartments, SwatiGunj Chennai - 408862");
+        Person person7= new Person("Riya Bharat ","Ramkissoon ","919976704445","46, Ajinkya Villas, Hinjewadi Ahmedabad - 465272");
+        Person person8= new Person("Heer Pratap  ","Binnani","9110032700045","103, Rashid Heights, Aundh Bikaner - 589185");
+        Person person9= new Person("Baalkrishan Ganesh  ","Ganesh Pal","91900704445","23, 64, Sodala, Bhopal - 454733");
+        Person person10= new Person("Giaan ","Ram","919976704000","19, Drishti Apartments, DaminiGunj Gurgaon - 211019");
+
+        people.add(person1);
+        people.add(person2);
+        people.add(person3);
+        people.add(person4);
+        people.add(person5);
+
+        people.add(person6);
+        people.add(person7);
+        people.add(person8);
+        people.add(person9);
+        people.add(person10);
+
+        while ((exit)){
+            System.out.println("\nWelcome...");
+            System.out.println("1-To Display rental apartment ");
+            System.out.println("2- Rent the apartment");
+            System.out.println("3-Personal items");
+            System.out.println("4-Add items in Parking Place");
+            System.out.println("5- Remove the items in Parking Place");
+            System.out.println("6- Add the vehicle in own Parking place");
+            System.out.println("7- Remove the vehicle in own Parking place");
+            System.out.println("8- exit");
+
+
+            result=enter.nextInt();
+            switch (result){
+                case 1:
+                    apartments();
+                    break;
+                case 2:
+                    rentParkingSpace();
+            }
+        }}
+
+        public static void rentParkingSpace(){
+            System.out.println("Welcome to rent ");
+
+
+            System.out.println("enter length");
+            double length=enter.nextDouble();
+
+            System.out.println("enter width");
+            double width=enter.nextDouble();
+
+            System.out.println("enter height");
+            double height=enter.nextDouble();
+
+            ParkingSpace  space= new ParkingSpace(length,width,height);
+            parkingSpaces.add(space);
+
+            Vehicle vehicle= new Vehicle("Car",100.00,VehicleType.BOAT);
+        
+    }
+
+
+
+
+           public static void apartments(){
+          for (int i=0;i<apartments.size();i++){
+              System.out.println("\nYour apartment ID is "+apartments.get(i).getID()+
+              " ,and length, width and height  of the apartment are :"+apartments.get(i).getLength()+", "+
+                      apartments.get(i).getWidth()+", "+
+                      apartments.get(i).getHeight()+
+                      " volume of the apartments is "+apartments.get(i).getVolume()+
+                      "\nAddress is "+"'"+apartments.get(i).getAddress()+"'");
+          }
+
+
+                }
+
+            }
+
+
+
+
+
+
+
